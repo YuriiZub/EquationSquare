@@ -1,26 +1,29 @@
 package com.squareequantion.controller;
 
-import com.squareequantion.repository.EquationRepository;
+import com.squareequantion.service.EquationService;
+import com.squareequantion.service.EquationSolution;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.squareequantion.model.EquantionsEntity;
-import com.squareequantion.service.EquationSolution;
 
 /**
  * @author Yurii Zub
- * @version 1.0.1
+ * @version 1.1.2
  */
 @Controller
 public class EquantionController {
-
     @Autowired
-    private EquationRepository equationRepository; //Repository
-    @Autowired
-    private EquationSolution solution;//Solution for calculation
+    ApplicationContext context;
+   /*Commented, because some problems with configuration*/
+    // @Autowired
+    // private EquationRepository equationRepository; //Repository
+    // @Autowired
+    // private EquationSolutionImpl solution;//Solution for calculation
 
     /**
      * Getting of my page
@@ -40,13 +43,18 @@ public class EquantionController {
      * @param model     model
      * @return return's of results
      */
-    @RequestMapping(value = "/equantion", method = RequestMethod.POST)
+    @RequestMapping(value = "/equation", method = RequestMethod.POST)
     public String calcSubmit(@ModelAttribute EquantionsEntity equantion, Model model) {
-        solution.setResult(equantion);
-        solution.doSolution();
-        equationRepository.save(equantion);
+
+        EquationSolution solutionBean = context.getBean(EquationSolution.class);
+        System.out.println("From post = " + equantion.toString());
+        //EquationService serviceBean = context.getBean(EquationService.class);
+        model.addAttribute("saved", "Some problems!");
+        solutionBean.setResult(equantion);
+        solutionBean.doSolution();
+        // serviceBean.save(equantion);
         model.addAttribute("saved", "All saved");
-        model.addAttribute("equantion", equantion);
+        model.addAttribute("equation", equantion);
         return "results";
     }
 

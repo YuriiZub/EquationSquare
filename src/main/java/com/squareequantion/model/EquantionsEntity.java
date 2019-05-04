@@ -19,7 +19,11 @@ public class EquantionsEntity {
     private double discriminant;
     private Double firstResult;
     private Double secondResult;
-    private double successResult;
+    private int successResult;
+
+    public EquantionsEntity() {
+    }
+
 
     @Id
     @Column(name = "id", nullable = false)
@@ -99,7 +103,7 @@ public class EquantionsEntity {
         return successResult;
     }
 
-    public void setSuccessResult(double successResult) {
+    public void setSuccessResult(int successResult) {
         this.successResult = successResult;
     }
 
