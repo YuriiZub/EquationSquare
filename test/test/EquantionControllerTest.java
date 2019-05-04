@@ -67,17 +67,23 @@ import org.springframework.test.web.servlet.MockMvc;
 //@SpringApplicationConfiguration(classes = WebConfig.class)
 public class EquantionControllerTest {
 
-    @Mock
-    private EquantionsEntity equantionsEntity = new EquantionsEntity(); //Repository
-    @InjectMocks
-    private EquationSolutionImpl solution = new EquationSolutionImpl();//Solution for calculation
+    @Autowired
+    protected WebApplicationContext context;
 
-    private EquantionController controller;
 
-    @InjectMocks
-    private ApplicationContext applicationContext;
+    //@Mock
+    //private EquantionsEntity equantionsEntity = new EquantionsEntity(); //Repository
+    //@InjectMocks
+    //private EquationSolutionImpl solution = new EquationSolutionImpl();//Solution for calculation
+
+    //private EquantionController controller;
+
+    //@InjectMocks
+    //private ApplicationContext applicationContext;
 
     private MockMvc mockMvc;
+
+
 
 
    // private static MockHttpServletRequest request;
@@ -96,6 +102,12 @@ public class EquantionControllerTest {
 
     @Test
     public void getMainPage() throws Exception {
+
+
+        this.mockMvc.perform(get("/")
+                .andExpect(status().isOk())
+                .andExpect(content().string("index"));
+
         /*
         given(this.userVehicleService.getVehicleDetails("sboot"))
                 .willReturn(new VehicleDetails("Honda", "Civic"));
