@@ -1,19 +1,19 @@
 package com.squareequantion.service;
 
 import com.squareequantion.model.EquantionsEntity;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Solution for solving of square equantion
+ *
  * @author Yurii Zub
  * @version 1.1.3
  */
 
-@Component
+@Service
 public class EquationSolutionImpl implements EquationSolution {
 
-    private EquantionsEntity result;//Input parameters ant result here
+    private EquantionsEntity result;//Parameters of input and results here
 
     public EquationSolutionImpl() {
 
@@ -37,7 +37,7 @@ public class EquationSolutionImpl implements EquationSolution {
         double b = this.result.getParamB();
         double c = this.result.getParamC();
 
-        if(a!=0) {
+        if (a != 0) {
             double D = b * b - 4 * a * c;
         /*Equantion has two results x1 and x2*/
             if (D > 0) {

@@ -16,10 +16,6 @@
             <td>${equation.paramA}</td>
         </tr>
         <tr>
-            <td>a :</td>
-            <td>${equation.paramA}</td>
-        </tr>
-        <tr>
             <td>b :</td>
             <td>${equation.paramB}</td>
         </tr>
@@ -27,7 +23,6 @@
             <td>c :</td>
             <td>${equation.paramC}</td>
         </tr>
-
         <tr>
             <td>D :</td>
             <td>${equation.discriminant}</td>
@@ -65,7 +60,7 @@
     <h3 th:text="${saved}"></h3>
 </div>
 <div>
-    <a href="/equantion">new calculation</a>
+    <a href="/equation">new calculation</a>
 </div>
 
 

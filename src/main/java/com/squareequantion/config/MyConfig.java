@@ -3,7 +3,7 @@ package com.squareequantion.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -13,15 +13,14 @@ import org.springframework.web.servlet.view.JstlView;
 
 /**
  * Web configurer class
- * Created by Yurii on 5/4/2019.
+ * @author Created by Yurii on 5/4/2019.
  *
- * @version 1.0.1
+ * @version 1.0.2
  */
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "com.squareequantion")
-@EnableJpaRepositories
-//@Import({DBConfig.class})
+@Import({DBConfig.class})
 
 public class MyConfig extends WebMvcConfigurerAdapter {
 

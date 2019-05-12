@@ -6,7 +6,7 @@
 </head>
 <body>
 <h3>ax^2 + bx + c = 0:</h3>
-<a href="equantion">Calculator for square equations</a>
+<a href="equation">Calculator for square equations</a>
 
 </body>
 </html>

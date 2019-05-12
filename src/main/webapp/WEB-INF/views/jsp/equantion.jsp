@@ -4,19 +4,20 @@
 </head>
 <body>
 <h3>Welcome, Enter The Employee Details</h3>
+
 <form:form method="POST"
-           action="/equation" modelAttribute="equantion">
+           action="${pagename}" modelAttribute="equantion">
     <table>
         <tr>
-            <td><form:label path="paramA">Name</form:label></td>
+            <td><form:label path="paramA">a:</form:label></td>
             <td><form:input path="paramA" value="1" required="true" type="number"/></td>
         </tr>
         <tr>
-            <td><form:label path="paramB">Id</form:label></td>
+            <td><form:label path="paramB">b:</form:label></td>
             <td><form:input path="paramB" value="1" required="true" type="number"/></td>
         </tr>
         <tr>
-            <td><form:label path="paramC">Id</form:label></td>
+            <td><form:label path="paramC">c:</form:label></td>
             <td><form:input path="paramC" value="1" required="true" type="number"/></td>
         </tr>
         <tr>

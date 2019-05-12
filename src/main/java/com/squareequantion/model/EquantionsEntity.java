@@ -7,10 +7,10 @@ import java.util.Objects;
  * Entity for equantion square
  *
  * @author Yurii Zub
- * @version 1.0.0
+ * @version 1.0.1
  */
 @Entity
-@Table(name = "equantions", schema = "equantions", catalog = "")
+@Table(name = "equantions")
 public class EquantionsEntity {
     private int id;
     private double paramA;
@@ -125,7 +125,7 @@ public class EquantionsEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, paramA, paramB, paramC, discriminant, firstResult, secondResult, successResult);
+        return Objects.hash(id);
     }
 
     @Override

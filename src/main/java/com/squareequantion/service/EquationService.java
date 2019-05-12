@@ -3,11 +3,12 @@ package com.squareequantion.service;
 import com.squareequantion.model.EquantionsEntity;
 
 /**
- * CRUD Service
- * Created by Yurii on 5/3/2019.
+ * DAO Service
+ * @author  Created by Yurii on 5/3/2019.
+ * @interface
  */
 public interface EquationService {
-    EquantionsEntity save(EquantionsEntity equation);
+    void save(EquantionsEntity equation);
 }
 
 

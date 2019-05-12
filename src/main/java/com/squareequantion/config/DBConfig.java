@@ -1,26 +1,24 @@
 package com.squareequantion.config;
 
-import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import java.io.IOException;
 import java.util.Properties;
 
 /**
  * Database configurer class
- * Created by Yurii on 5/3/2019.
- *
- * @version 1.0.0
- *          Some problems during deployment, because commented annotations
+ * @author  Created by Yurii on 5/3/2019.
+ * @version 1.2.0
  */
-//@Configuration
-//@EnableJpaRepositories
+@EnableTransactionManagement
 public class DBConfig {
+    /**
+     * Database connection
+     * @return
+     */
     @Bean
     DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -32,21 +30,36 @@ public class DBConfig {
     }
 
     @Bean
-    LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean emFactory = new LocalContainerEntityManagerFactoryBean();
-        emFactory.setDataSource(dataSource());
-        emFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        emFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan(new String[]{"com.squareequantion"});
+        sessionFactory.setHibernateProperties(hibernateProperties());
+        try {
+            sessionFactory.afterPropertiesSet();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sessionFactory;
+    }
+
+    /**
+     * Properties for Hibernate settings
+     * use org.hibernate.dialect.MySQL5InnoDBDialect for InnoDb
+     * @return
+     */
+    private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        emFactory.setJpaProperties(properties);
-        return emFactory;
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.hbm2ddl.auto", "update");
+        return properties;
     }
 
     @Bean
-    JpaTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+    public HibernateTransactionManager getTransactionManager() {
+        HibernateTransactionManager transactionManager =
+                new HibernateTransactionManager(sessionFactory().getObject());
         return transactionManager;
     }
 }
