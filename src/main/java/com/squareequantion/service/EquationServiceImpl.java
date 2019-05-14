@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0.2
  */
 
-@Service
+@Service("equationService")
 public class EquationServiceImpl implements EquationService {
 
     @Autowired

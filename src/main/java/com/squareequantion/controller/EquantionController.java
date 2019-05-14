@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.squareequantion.model.EquantionsEntity;
+
 import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * Main controller of this application
+ * Main controller of Equation application
  *
  * @author Yurii Zub
  * @version 1.2.0

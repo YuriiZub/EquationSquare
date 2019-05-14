@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @version 1.1.3
  */
 
-@Service
+@Service("equationSolution")
 public class EquationSolutionImpl implements EquationSolution {
 
     private EquantionsEntity result;//Parameters of input and results here
@@ -76,6 +76,7 @@ public class EquationSolutionImpl implements EquationSolution {
      * @param success Sucess flag of calculation 0 - are no results
      *                1 - is one results 2 - is two results
      */
+
     private void setResult(double a, double b, double c, double D, double X1, double X2, int success) {
         this.result.setParamA(a);
         this.result.setParamB(b);

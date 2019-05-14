@@ -9,9 +9,7 @@ import com.squareequantion.model.EquantionsEntity;
  * @interface
  */
 public interface EquationSolution {
-
     void setResult(EquantionsEntity result);
-
     void doSolution();
 }
 
