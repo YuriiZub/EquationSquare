@@ -1,6 +1,7 @@
 package com.squareequantion.service;
 
 import com.squareequantion.model.EquantionsEntity;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service("equationSolution")
+@Scope("prototype")
 public class EquationSolutionImpl implements EquationSolution {
 
     private EquantionsEntity result;//Parameters of input and results here

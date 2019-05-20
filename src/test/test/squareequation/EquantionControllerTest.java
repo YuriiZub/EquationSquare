@@ -8,11 +8,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import javax.persistence.EntityManager;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,18 +37,22 @@ public class EquantionControllerTest {
     @InjectMocks
     EquantionController controller;
 
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
     EquantionsEntity entity;
 
-    @Before
-    public void setUp() {
-
-        mockMvc = MockMvcBuilders.standaloneSetup(this.controller).build();
-        entity = new EquantionsEntity();
+    public static EquantionsEntity createEntity() {
+        EquantionsEntity entity = new EquantionsEntity();
         entity.setParamA(1.0);
         entity.setParamB(2.0);
         entity.setParamC(1.0);
+        return entity;
+    }
+
+
+    @Before
+    public void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(this.controller).build();
     }
 
     /**
@@ -67,7 +75,7 @@ public class EquantionControllerTest {
     public void calcSubmit() throws Exception {
 
         mockMvc.perform(post("/equation")
-                .flashAttr("equantion", new EquantionsEntity())
+                .flashAttr("equantion", createEntity())
         )
                 .andExpect(status().isOk())
                 .andExpect(view().name("results"));

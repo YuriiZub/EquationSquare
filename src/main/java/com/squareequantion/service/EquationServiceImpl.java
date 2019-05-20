@@ -3,6 +3,7 @@ package com.squareequantion.service;
 import com.squareequantion.dao.EquantionsDAO;
 import com.squareequantion.model.EquantionsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service("equationService")
+@Scope("prototype")
 public class EquationServiceImpl implements EquationService {
 
     @Autowired
