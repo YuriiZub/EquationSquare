@@ -1,4 +1,4 @@
-package com.squareequantion.dao;
+package com.squareequantion.service.dao;
 
 import com.squareequantion.model.EquantionsEntity;
 

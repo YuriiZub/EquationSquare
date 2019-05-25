@@ -1,15 +1,13 @@
 package com.squareequantion.controller;
 
-import com.squareequantion.service.EquationService;
-import com.squareequantion.service.EquationSolution;
+import com.squareequantion.service.solution.EquationSolution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.squareequantion.model.EquantionsEntity;
+import com.squareequantion.service.dto.EquationDTO;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,9 +20,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class EquantionController {
-
-    @Autowired
-    EquationService service;
 
     @Autowired
     EquationSolution solution;
@@ -48,15 +43,10 @@ public class EquantionController {
      * @return return's of results
      */
 
-    @Transactional
     @RequestMapping(value = "/equation", method = RequestMethod.POST)
-    public String calcSubmit(@ModelAttribute EquantionsEntity equantion, Model model) {
-        model.addAttribute("saved", "Some problems!");
-        solution.setResult(equantion);
-        solution.doSolution();
-        service.save(equantion);
+    public String calcSubmit(@ModelAttribute EquationDTO equantion, Model model) {
+        model.addAttribute("equation", solution.doSolution(equantion));
         model.addAttribute("saved", "All saved");
-        model.addAttribute("equation", equantion);
         return "results";
     }
 
@@ -71,7 +61,7 @@ public class EquantionController {
         String pagename = request.getRequestURL().toString();
         model.addAttribute("pagename", pagename);
         model.addAttribute("saved", "");
-        model.addAttribute("equantion", new EquantionsEntity());
+        model.addAttribute("equantion", new EquationDTO());
         return "equantion";
     }
 }
