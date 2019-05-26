@@ -98,6 +98,28 @@ public class EquationDTO {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EquationDTO)) return false;
+
+        EquationDTO that = (EquationDTO) o;
+
+        if (getId() != that.getId()) return false;
+        if (Double.compare(that.getParamA(), getParamA()) != 0) return false;
+        if (Double.compare(that.getParamB(), getParamB()) != 0) return false;
+        if (Double.compare(that.getParamC(), getParamC()) != 0) return false;
+        if (Double.compare(that.getDiscriminant(), getDiscriminant()) != 0) return false;
+        if (getSuccessResult() != that.getSuccessResult()) return false;
+        if (!getFirstResult().equals(that.getFirstResult())) return false;
+        return getSecondResult().equals(that.getSecondResult());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
+    }
+
+    @Override
     public String toString() {
         return "EquationDTO{" +
                 "id=" + id +

@@ -2,25 +2,22 @@ package test.squareequation;
 
 import com.squareequantion.config.MyConfig;
 import com.squareequantion.controller.EquantionController;
-import com.squareequantion.model.EquantionsEntity;
+import com.squareequantion.service.dto.EquationDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import javax.persistence.EntityManager;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Test of Main controller
@@ -32,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = {MyConfig.class})
 @WebAppConfiguration
+@EnableWebMvc
+
 public class EquantionControllerTest {
 
     @InjectMocks
@@ -39,24 +38,24 @@ public class EquantionControllerTest {
 
     MockMvc mockMvc;
 
-    EquantionsEntity entity;
 
-    public static EquantionsEntity createEntity() {
-        EquantionsEntity entity = new EquantionsEntity();
-        entity.setParamA(1.0);
-        entity.setParamB(2.0);
-        entity.setParamC(1.0);
-        return entity;
+    public static EquationDTO createDTO() {
+        EquationDTO equationDTO = new EquationDTO();
+        equationDTO.setParamA(1.0);
+        equationDTO.setParamB(2.0);
+        equationDTO.setParamC(1.0);
+        return equationDTO;
     }
 
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(this.controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
     /**
      * Test of root route
+     *
      * @throws Exception
      */
     @Test
@@ -69,13 +68,15 @@ public class EquantionControllerTest {
 
     /**
      * Test of post form
+     *
      * @throws Exception
      */
+
     @Test
     public void calcSubmit() throws Exception {
 
         mockMvc.perform(post("/equation")
-                .flashAttr("equantion", createEntity())
+                .flashAttr("equantion", createDTO())
         )
                 .andExpect(status().isOk())
                 .andExpect(view().name("results"));
@@ -83,6 +84,7 @@ public class EquantionControllerTest {
 
     /**
      * Test of result route
+     *
      * @throws Exception
      */
     @Test

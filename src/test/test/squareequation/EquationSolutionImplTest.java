@@ -1,8 +1,10 @@
 package test.squareequation;
 
-import com.squareequantion.model.EquantionsEntity;
+import com.squareequantion.service.dto.EquationDTO;
 import com.squareequantion.service.solution.EquationSolutionImpl;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test for main functionality
@@ -13,25 +15,20 @@ import org.junit.*;
 public class EquationSolutionImplTest {
 
     private EquationSolutionImpl mySolution;//Solution entity for testing
-    private EquantionsEntity myEntity;//Entity for testing
-    private EquantionsEntity myCompareEntity;//Etity with expected parameters
+    private EquationDTO realDto;// real DTO
+    private EquationDTO expectedDto;//expected DTO
 
     @Before
     public void setEntityParam() {
-        myEntity = new EquantionsEntity();
-        myCompareEntity = new EquantionsEntity();
+        realDto = new EquationDTO();
+        expectedDto = new EquationDTO();
         mySolution = new EquationSolutionImpl();
 
     }
 
-/*    @Test
-    public void setResult() throws Exception {
-        mySolution.setResult(myEntity);
-        assertEquals(mySolution.getResult(), myEntity);
-    }*/
-
     /**
      * Test for result of calculation
+     *
      * @throws Exception
      */
     @Test
@@ -39,32 +36,19 @@ public class EquationSolutionImplTest {
 
         /*Test for receiving only one result*/
         enterData(1, 1, 2, 1, 0, -1, 0.0, 1);
-        /*Set result and do calculation*/
-/*        mySolution.setResult(myEntity);
-        mySolution.doSolution();
-        assertEquals(myCompareEntity, myEntity);*/
+        assertEquals(expectedDto, mySolution.doSolution(realDto));
 
         /*Test for receiving two result*/
-        enterData(2,1,6,1,32,-5.82842712474619,-0.1715728752538097,2);
-        /*Set result and do calculation*/
-/*        mySolution.setResult(myEntity);
-        mySolution.doSolution();
-        assertEquals(myCompareEntity, myEntity);*/
+        enterData(2, 1, 6, 1, 32, -5.82842712474619, -0.1715728752538097, 2);
+        assertEquals(expectedDto, mySolution.doSolution(realDto));
 
        /*Test for receiving no result with Discriminant < 0*/
         enterData(3, 1, 1, 1, -3, 0.0, 0.0, 0);
-        /*Set result and do calculation*/
-/*        mySolution.setResult(myEntity);
-        mySolution.doSolution();
-        assertEquals(myCompareEntity, myEntity);*/
+        assertEquals(expectedDto, mySolution.doSolution(realDto));
 
         /*Test for receiving no result when first parameter == 0*/
         enterData(4, 0, 1, 1, 0, 0.0, 0.0, -1);
-        /*Set result and do calculation*/
-/*        mySolution.setResult(myEntity);
-        mySolution.doSolution();
-        assertEquals(myCompareEntity, myEntity);*/
-
+        assertEquals(expectedDto, mySolution.doSolution(realDto));
     }
 
     /**
@@ -81,20 +65,20 @@ public class EquationSolutionImplTest {
      */
     private void enterData(int iD, double a, double b, double c, double D, double X1, double X2, int success) {
          /*Enter data for expected entity*/
-        myCompareEntity.setId(iD);
-        myCompareEntity.setParamA(a);
-        myCompareEntity.setParamB(b);
-        myCompareEntity.setParamC(c);
-        myCompareEntity.setDiscriminant(D);
-        myCompareEntity.setFirstResult(X1);
-        myCompareEntity.setSecondResult(X2);
-        myCompareEntity.setSuccessResult(success);
+        expectedDto.setId(iD);
+        expectedDto.setParamA(a);
+        expectedDto.setParamB(b);
+        expectedDto.setParamC(c);
+        expectedDto.setDiscriminant(D);
+        expectedDto.setFirstResult(X1);
+        expectedDto.setSecondResult(X2);
+        expectedDto.setSuccessResult(success);
 
         /*Enter data  for actual Entity*/
-        myEntity.setId(iD);
-        myEntity.setParamA(a);
-        myEntity.setParamB(b);
-        myEntity.setParamC(c);
+        realDto.setId(iD);
+        realDto.setParamA(a);
+        realDto.setParamB(b);
+        realDto.setParamC(c);
 
     }
 
