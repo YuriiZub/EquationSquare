@@ -8,12 +8,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -27,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = {MyConfig.class})
-@WebAppConfiguration
 @EnableWebMvc
 
 public class EquationControllerTest {
@@ -36,16 +40,6 @@ public class EquationControllerTest {
     EquationController controller;
 
     MockMvc mockMvc;
-
-
-    public static EquationDTO createDTO() {
-        EquationDTO equationDTO = new EquationDTO();
-        equationDTO.setParamA(1.0);
-        equationDTO.setParamB(2.0);
-        equationDTO.setParamC(1.0);
-        return equationDTO;
-    }
-
 
     @Before
     public void setUp() {
@@ -73,12 +67,19 @@ public class EquationControllerTest {
 
     @Test
     public void calcSubmit() throws Exception {
-
-        mockMvc.perform(post("/equation")
-                .flashAttr("equantion", createDTO())
+        mockMvc.perform(post("/results")
+                .flashAttr("equationdto", createDTO())
         )
                 .andExpect(status().isOk())
                 .andExpect(view().name("results"));
+    }
+
+    public static EquationDTO createDTO() {
+        EquationDTO equationDTO = new EquationDTO();
+        equationDTO.setParamA(1.0);
+        equationDTO.setParamB(2.0);
+        equationDTO.setParamC(1.0);
+        return equationDTO;
     }
 
     /**
@@ -87,10 +88,10 @@ public class EquationControllerTest {
      * @throws Exception
      */
     @Test
-    public void calcForm() throws Exception {
+    public void showEnterForm() throws Exception {
         mockMvc.perform(get("/equation")
                 .accept(MediaType.TEXT_HTML))
-                .andExpect(view().name("equantion"))
+                .andExpect(view().name("equationform"))
                 .andExpect(status().isOk());
     }
 }

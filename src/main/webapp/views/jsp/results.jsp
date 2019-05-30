@@ -13,36 +13,36 @@
     <table>
         <tr>
             <td>a :</td>
-            <td>${equation.paramA}</td>
+            <td>${equationentity.paramA}</td>
         </tr>
         <tr>
             <td>b :</td>
-            <td>${equation.paramB}</td>
+            <td>${equationentity.paramB}</td>
         </tr>
         <tr>
             <td>c :</td>
-            <td>${equation.paramC}</td>
+            <td>${equationentity.paramC}</td>
         </tr>
         <tr>
             <td>D :</td>
-            <td>${equation.discriminant}</td>
+            <td>${equationentity.discriminant}</td>
         </tr>
 
         <c:choose>
-            <c:when test="${equation.successResult == 1}">
+            <c:when test="${equationentity.successResult == 1}">
                 <tr style="color:blue;">
                     <td>X1 :</td>
-                    <td>${equation.firstResult}</td>
+                    <td>${equationentity.firstResult}</td>
                 </tr>
             </c:when>
-            <c:when test="${equation.successResult == 2}">
+            <c:when test="${equationentity.successResult == 2}">
                 <tr style="color:blue;">
                     <td>X1 :</td>
-                    <td>${equation.firstResult}</td>
+                    <td>${equationentity.firstResult}</td>
                 </tr>
                 <tr style="color:blue;">
                     <td>X2 :</td>
-                    <td>${equation.secondResult}</td>
+                    <td>${equationentity.secondResult}</td>
                 </tr>
 
             </c:when>

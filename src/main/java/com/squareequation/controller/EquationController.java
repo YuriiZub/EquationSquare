@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.squareequation.service.dto.EquationDTO;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,20 +30,17 @@ public class EquationController {
         return "index";
     }
 
-    @RequestMapping(value = "/equation", method = RequestMethod.POST)
+    @RequestMapping(value = "/results", method = RequestMethod.POST)
     public String showCalculationResults(@ModelAttribute EquationDTO equationdto, Model model) throws  Exception{
-        model.addAttribute("equation", solution.calculateEquation(equationdto));
+        model.addAttribute("equationentity", solution.calculateEquation(equationdto));
         model.addAttribute("saved", "All saved");
         return "results";
     }
 
     @RequestMapping(value = "/equation", method = RequestMethod.GET)
     public String showEnterForm(Model model, HttpServletRequest request) {
-        String pagename = request.getRequestURL().toString();
-        model.addAttribute("pagename", pagename);
-        model.addAttribute("saved", "");
         model.addAttribute("equationdto", new EquationDTO());
-        return "equation";
+        return "equationform";
     }
 
 

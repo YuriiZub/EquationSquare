@@ -3,10 +3,10 @@
 <head>
 </head>
 <body>
-<h3>Welcome, Enter The Employee Details</h3>
+<h3>Enter the input data, please:</h3>
 
 <form:form method="POST"
-           action="${pagename}" modelAttribute="equationdto">
+           action="/results" modelAttribute="equationdto">
     <table>
         <tr>
             <td><form:label path="paramA">a:</form:label></td>
