@@ -3,6 +3,8 @@ package com.squareequantion.service.solution;
 import com.squareequantion.model.EquantionsEntity;
 import com.squareequantion.service.aop.SolutionDone;
 import com.squareequantion.service.dto.EquationDTO;
+import com.squareequantion.service.err.DiscriminanteLessThanZeroException;
+import com.squareequantion.service.err.FirstParamIsZeroException;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,8 @@ public class EquationSolutionImpl implements EquationSolution {
     }
 
     @SolutionDone
-    public EquantionsEntity calculateEquation(EquationDTO equationDTO) throws Exception {
+    public EquantionsEntity calculateEquation(EquationDTO equationDTO)
+            throws FirstParamIsZeroException, DiscriminanteLessThanZeroException {
 
         verifyFirstEquationParameter(equationDTO);
         double discriminante = verifyDiscriminanteValue(equationDTO);
@@ -40,14 +43,14 @@ public class EquationSolutionImpl implements EquationSolution {
         return resultEntity;
     }
 
-    private void verifyFirstEquationParameter(EquationDTO equationDTO) throws Exception {
-        if (equationDTO.getParamA() == 0.0) throw new Exception("First param couldn't be zero");
+    private void verifyFirstEquationParameter(EquationDTO equationDTO) throws FirstParamIsZeroException {
+        if (equationDTO.getParamA() == 0.0) throw new FirstParamIsZeroException();
     }
 
-    private double verifyDiscriminanteValue(EquationDTO equationDTO) throws Exception {
+    private double verifyDiscriminanteValue(EquationDTO equationDTO) throws DiscriminanteLessThanZeroException {
         double discriminante = equationDTO.getParamB() * equationDTO.getParamB() - 4 * equationDTO.getParamA() * equationDTO.getParamC();
         if (discriminante >= 0) return discriminante;
-        else throw new Exception("Equation coulnd't be solved, because D < 0;");
+        else throw new DiscriminanteLessThanZeroException(String.valueOf(discriminante));
     }
 
     /*Equantion has two results x1 and x2, because discriminante > 0*/

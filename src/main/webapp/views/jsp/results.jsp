@@ -29,10 +29,6 @@
         </tr>
 
         <c:choose>
-            <c:when test="${equation.successResult == -1}"><h3 style="color:red;">Error1! First parameter could't be
-                zero value!</h3></c:when>
-            <c:when test="${equation.successResult == 0}"><h3 style="color:red;">Error2! Could'nt be solution for this
-                parameters!</h3></c:when>
             <c:when test="${equation.successResult == 1}">
                 <tr style="color:blue;">
                     <td>X1 :</td>

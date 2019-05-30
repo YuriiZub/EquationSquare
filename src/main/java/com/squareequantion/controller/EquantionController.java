@@ -45,4 +45,6 @@ public class EquantionController {
         model.addAttribute("equantion", new EquationDTO());
         return "equantion";
     }
+
+
 }
