@@ -1,15 +1,14 @@
-package com.squareequantion.controller;
+package com.squareequation.controller;
 
-import com.squareequantion.service.solution.EquationSolution;
+import com.squareequation.service.solution.EquationSolution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.squareequantion.service.dto.EquationDTO;
+import com.squareequation.service.dto.EquationDTO;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.2.1
  */
 @Controller
-public class EquantionController {
+public class EquationController {
 
     @Autowired
     EquationSolution solution;
@@ -31,8 +30,8 @@ public class EquantionController {
     }
 
     @RequestMapping(value = "/equation", method = RequestMethod.POST)
-    public String showCalculationResults(@ModelAttribute EquationDTO equantion, Model model) throws  Exception{
-        model.addAttribute("equation", solution.calculateEquation(equantion));
+    public String showCalculationResults(@ModelAttribute EquationDTO equationdto, Model model) throws  Exception{
+        model.addAttribute("equation", solution.calculateEquation(equationdto));
         model.addAttribute("saved", "All saved");
         return "results";
     }
@@ -42,8 +41,8 @@ public class EquantionController {
         String pagename = request.getRequestURL().toString();
         model.addAttribute("pagename", pagename);
         model.addAttribute("saved", "");
-        model.addAttribute("equantion", new EquationDTO());
-        return "equantion";
+        model.addAttribute("equationdto", new EquationDTO());
+        return "equation";
     }
 
 

@@ -1,8 +1,8 @@
 package test.squareequation;
 
-import com.squareequantion.model.EquantionsEntity;
-import com.squareequantion.service.dto.EquationDTO;
-import com.squareequantion.service.solution.EquationSolutionImpl;
+import com.squareequation.model.EquationEntity;
+import com.squareequation.service.dto.EquationDTO;
+import com.squareequation.service.solution.EquationSolutionImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,12 +19,12 @@ public class EquationSolutionImplTest {
 
     private EquationSolutionImpl mySolution;
     private EquationDTO inputDto;
-    private EquantionsEntity expectedCalculationResults;
+    private EquationEntity expectedCalculationResults;
 
     @Before
     public void setEntityParam() {
         inputDto = new EquationDTO();
-        expectedCalculationResults = new EquantionsEntity();
+        expectedCalculationResults = new EquationEntity();
         mySolution = new EquationSolutionImpl();
     }
 

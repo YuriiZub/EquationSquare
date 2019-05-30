@@ -1,6 +1,4 @@
-package com.squareequantion.service.err;
-
-import com.squareequantion.service.dto.EquationDTO;
+package com.squareequation.service.err;
 
 /**
  * Created by Yurii on 5/30/2019.

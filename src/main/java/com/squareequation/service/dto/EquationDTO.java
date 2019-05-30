@@ -1,4 +1,4 @@
-package com.squareequantion.service.dto;
+package com.squareequation.service.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;

@@ -1,7 +1,7 @@
-package com.squareequantion.service.aop;
+package com.squareequation.service.aop;
 
-import com.squareequantion.service.dao.EquantionsDAO;
-import com.squareequantion.model.EquantionsEntity;
+import com.squareequation.model.EquationEntity;
+import com.squareequation.service.dao.EquationDAO;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -21,13 +21,13 @@ import org.springframework.stereotype.Service;
 public class EquationServiceImpl implements EquationService {
 
     @Autowired
-    EquantionsDAO equantionsDAO;
+    EquationDAO equationDAO;
 
     @Override
     @AfterReturning(
             pointcut = "@annotation(SolutionDone)",
             returning = "equationEntity")
-    public void saveSolution(EquantionsEntity equationEntity) {
-        equantionsDAO.saveEquantion(equationEntity);
+    public void saveSolution(EquationEntity equationEntity) {
+        equationDAO.saveEquantion(equationEntity);
     }
 }

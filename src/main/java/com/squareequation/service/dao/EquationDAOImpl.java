@@ -1,6 +1,6 @@
-package com.squareequantion.service.dao;
+package com.squareequation.service.dao;
 
-import com.squareequantion.model.EquantionsEntity;
+import com.squareequation.model.EquationEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
  * @version 1.0.1
  */
 @Repository
-public class EquantionsDAOImpl implements EquantionsDAO {
+public class EquationDAOImpl implements EquationDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void saveEquantion(EquantionsEntity equantion) {
+    public void saveEquantion(EquationEntity equantion) {
         Session currentSession = sessionFactory.openSession();
         currentSession.beginTransaction();
         currentSession.saveOrUpdate(equantion);

@@ -1,4 +1,4 @@
-package com.squareequantion.config;
+package com.squareequation.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -33,7 +33,7 @@ public class DBConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"com.squareequantion"});
+        sessionFactory.setPackagesToScan(new String[]{"com.squareequation"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         try {
             sessionFactory.afterPropertiesSet();

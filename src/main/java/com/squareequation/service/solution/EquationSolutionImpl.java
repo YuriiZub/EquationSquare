@@ -1,10 +1,10 @@
-package com.squareequantion.service.solution;
+package com.squareequation.service.solution;
 
-import com.squareequantion.model.EquantionsEntity;
-import com.squareequantion.service.aop.SolutionDone;
-import com.squareequantion.service.dto.EquationDTO;
-import com.squareequantion.service.err.DiscriminanteLessThanZeroException;
-import com.squareequantion.service.err.FirstParamIsZeroException;
+import com.squareequation.model.EquationEntity;
+import com.squareequation.service.aop.SolutionDone;
+import com.squareequation.service.dto.EquationDTO;
+import com.squareequation.service.err.DiscriminanteLessThanZeroException;
+import com.squareequation.service.err.FirstParamIsZeroException;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +25,13 @@ public class EquationSolutionImpl implements EquationSolution {
     }
 
     @SolutionDone
-    public EquantionsEntity calculateEquation(EquationDTO equationDTO)
+    public EquationEntity calculateEquation(EquationDTO equationDTO)
             throws FirstParamIsZeroException, DiscriminanteLessThanZeroException {
 
         verifyFirstEquationParameter(equationDTO);
         double discriminante = verifyDiscriminanteValue(equationDTO);
 
-        EquantionsEntity resultEntity = new EquantionsEntity();
+        EquationEntity resultEntity = new EquationEntity();
         resultEntity.setParamA(equationDTO.getParamA());
         resultEntity.setParamB(equationDTO.getParamB());
         resultEntity.setParamC(equationDTO.getParamC());
@@ -54,14 +54,14 @@ public class EquationSolutionImpl implements EquationSolution {
     }
 
     /*Equantion has two results x1 and x2, because discriminante > 0*/
-    private void setTwoEquationResults(EquantionsEntity resultEntity) {
+    private void setTwoEquationResults(EquationEntity resultEntity) {
         resultEntity.setFirstResult((-resultEntity.getParamB() - Math.sqrt(resultEntity.getDiscriminant())) / (2 * resultEntity.getParamA()));
         resultEntity.setSecondResult((-resultEntity.getParamB() + Math.sqrt(resultEntity.getDiscriminant())) / (2 * resultEntity.getParamA()));
         resultEntity.setSuccessResult(2);
     }
 
     /*Equantion has one results x1, because discriminante == 0 */
-    private void setOneEquationResult(EquantionsEntity resultEntity) {
+    private void setOneEquationResult(EquationEntity resultEntity) {
         resultEntity.setFirstResult(-resultEntity.getParamB() / (2 * resultEntity.getParamA()));
         resultEntity.setSecondResult(0.0);
         resultEntity.setSuccessResult(1);

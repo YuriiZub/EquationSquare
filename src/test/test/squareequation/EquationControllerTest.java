@@ -1,14 +1,13 @@
 package test.squareequation;
 
-import com.squareequantion.config.MyConfig;
-import com.squareequantion.controller.EquantionController;
-import com.squareequantion.service.dto.EquationDTO;
+import com.squareequation.config.MyConfig;
+import com.squareequation.controller.EquationController;
+import com.squareequation.service.dto.EquationDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -31,10 +30,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @EnableWebMvc
 
-public class EquantionControllerTest {
+public class EquationControllerTest {
 
     @InjectMocks
-    EquantionController controller;
+    EquationController controller;
 
     MockMvc mockMvc;
 

@@ -1,4 +1,4 @@
-package com.squareequantion.config;
+package com.squareequation.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

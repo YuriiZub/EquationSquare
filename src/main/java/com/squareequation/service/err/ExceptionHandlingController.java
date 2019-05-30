@@ -1,4 +1,4 @@
-package com.squareequantion.service.err;
+package com.squareequation.service.err;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;

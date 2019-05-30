@@ -1,4 +1,4 @@
-package com.squareequantion.service.aop;
+package com.squareequation.service.aop;
 
 import java.lang.annotation.*;
 

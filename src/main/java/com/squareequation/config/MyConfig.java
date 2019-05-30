@@ -1,4 +1,4 @@
-package com.squareequantion.config;
+package com.squareequation.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 @Configuration
-@ComponentScan(basePackages = "com.squareequantion")
+@ComponentScan(basePackages = "com.squareequation")
 @Import({DBConfig.class})
 
 public class MyConfig extends WebMvcConfigurerAdapter {

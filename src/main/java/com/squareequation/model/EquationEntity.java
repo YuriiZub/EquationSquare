@@ -1,4 +1,4 @@
-package com.squareequantion.model;
+package com.squareequation.model;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "equantions")
-public class EquantionsEntity {
+public class EquationEntity {
     private int id;
     private double paramA;
     private double paramB;
@@ -21,7 +21,7 @@ public class EquantionsEntity {
     private double secondResult;
     private int successResult;
 
-    public EquantionsEntity() {
+    public EquationEntity() {
     }
 
     @Id
@@ -110,7 +110,7 @@ public class EquantionsEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EquantionsEntity that = (EquantionsEntity) o;
+        EquationEntity that = (EquationEntity) o;
         return id == that.id &&
                 Double.compare(that.paramA, paramA) == 0 &&
                 Double.compare(that.paramB, paramB) == 0 &&
@@ -129,7 +129,7 @@ public class EquantionsEntity {
 
     @Override
     public String toString() {
-        return "EquantionsEntity{" +
+        return "EquationEntity{" +
                 "id=" + id +
                 ", paramA=" + paramA +
                 ", paramB=" + paramB +

@@ -6,7 +6,7 @@
 <h3>Welcome, Enter The Employee Details</h3>
 
 <form:form method="POST"
-           action="${pagename}" modelAttribute="equantion">
+           action="${pagename}" modelAttribute="equationdto">
     <table>
         <tr>
             <td><form:label path="paramA">a:</form:label></td>
