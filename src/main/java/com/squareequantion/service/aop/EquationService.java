@@ -1,5 +1,6 @@
 package com.squareequantion.service.aop;
 
+import com.squareequantion.model.EquantionsEntity;
 import com.squareequantion.service.dto.EquationDTO;
 
 /**
@@ -9,7 +10,7 @@ import com.squareequantion.service.dto.EquationDTO;
  * @interface
  */
 public interface EquationService {
-    void saveSolution(EquationDTO equationDTO);
+    void saveSolution(EquantionsEntity equationEntity);
 }
 
 

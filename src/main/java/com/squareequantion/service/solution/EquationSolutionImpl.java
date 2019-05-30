@@ -1,75 +1,67 @@
 package com.squareequantion.service.solution;
 
+import com.squareequantion.model.EquantionsEntity;
 import com.squareequantion.service.aop.SolutionDone;
 import com.squareequantion.service.dto.EquationDTO;
-import com.squareequantion.service.solution.EquationSolution;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * Solution for solving of square equantion
  * Enable AutoProxy in MyConfig
+ *
  * @author Yurii Zub
- * @version 1.1.3
+ * @version 1.2.3
  */
 
 @Service("equationSolution")
-@EnableAspectJAutoProxy(proxyTargetClass=true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class EquationSolutionImpl implements EquationSolution {
 
     public EquationSolutionImpl() {
 
     }
 
-    /**
-     * Method for calculation
-     * @param equationDTO
-     * @return
-     */
     @SolutionDone
-    public EquationDTO doSolution(EquationDTO equationDTO) {
-        /*calculation of descriminante*/
-        double a = equationDTO.getParamA();
-        double b = equationDTO.getParamB();
-        double c = equationDTO.getParamC();
-        double discriminant;
-        double D, x1, x2 = 0.0;
-        int successResult = 0;
+    public EquantionsEntity calculateEquation(EquationDTO equationDTO) throws Exception {
 
-        if (a != 0) {
-            D = b * b - 4 * a * c;
-        /*Equantion has two results x1 and x2*/
-            if (D > 0) {
-                x1 = (-b - Math.sqrt(D)) / (2 * a);
-                x2 = (-b + Math.sqrt(D)) / (2 * a);
-                successResult = 2;
-            }
-        /*Equantion has one results x1 */
-            else if (D == 0) {
-                x1 = -b / (2 * a);
-                x2 = 0.0;
-                successResult = 1;
-            }
-        /*Equantion has not any results*/
-            else {
-                x1 = 0.0;
-                x2 = 0.0;
-                successResult = 0;
-            }
-        }
-        /*First parameter is zero value*/
-        else {
-            D = 0;
-            x1 = 0;
-            x2 = 0;
-            successResult = -1;
-        }
-        equationDTO.setDiscriminant(D);
-        equationDTO.setFirstResult(x1);
-        equationDTO.setSecondResult(x2);
-        equationDTO.setSuccessResult(successResult);
-        return equationDTO;
+        verifyFirstEquationParameter(equationDTO);
+        double discriminante = verifyDiscriminanteValue(equationDTO);
+
+        EquantionsEntity resultEntity = new EquantionsEntity();
+        resultEntity.setParamA(equationDTO.getParamA());
+        resultEntity.setParamB(equationDTO.getParamB());
+        resultEntity.setParamC(equationDTO.getParamC());
+        resultEntity.setDiscriminant(discriminante);
+
+        if (discriminante > 0) setTwoEquationResults(resultEntity);
+        if (discriminante == 0) setOneEquationResult(resultEntity);
+
+        return resultEntity;
     }
 
+    private void verifyFirstEquationParameter(EquationDTO equationDTO) throws Exception {
+        if (equationDTO.getParamA() == 0.0) throw new Exception("First param couldn't be zero");
+    }
+
+    private double verifyDiscriminanteValue(EquationDTO equationDTO) throws Exception {
+        double discriminante = equationDTO.getParamB() * equationDTO.getParamB() - 4 * equationDTO.getParamA() * equationDTO.getParamC();
+        if (discriminante >= 0) return discriminante;
+        else throw new Exception("Equation coulnd't be solved, because D < 0;");
+    }
+
+    /*Equantion has two results x1 and x2, because discriminante > 0*/
+    private void setTwoEquationResults(EquantionsEntity resultEntity) {
+        resultEntity.setFirstResult((-resultEntity.getParamB() - Math.sqrt(resultEntity.getDiscriminant())) / (2 * resultEntity.getParamA()));
+        resultEntity.setSecondResult((-resultEntity.getParamB() + Math.sqrt(resultEntity.getDiscriminant())) / (2 * resultEntity.getParamA()));
+        resultEntity.setSuccessResult(2);
+    }
+
+    /*Equantion has one results x1, because discriminante == 0 */
+    private void setOneEquationResult(EquantionsEntity resultEntity) {
+        resultEntity.setFirstResult(-resultEntity.getParamB() / (2 * resultEntity.getParamA()));
+        resultEntity.setSecondResult(0.0);
+        resultEntity.setSuccessResult(1);
+    }
 }
+

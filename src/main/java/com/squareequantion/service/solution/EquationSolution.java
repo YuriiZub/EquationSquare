@@ -1,5 +1,6 @@
 package com.squareequantion.service.solution;
 
+import com.squareequantion.model.EquantionsEntity;
 import com.squareequantion.service.dto.EquationDTO;
 
 /**
@@ -10,7 +11,7 @@ import com.squareequantion.service.dto.EquationDTO;
  * @return EquationDTO
  */
 
-public interface EquationSolution {
-    EquationDTO doSolution(EquationDTO equationDTO);
+public interface EquationSolution  {
+    EquantionsEntity calculateEquation(EquationDTO equationDTO) throws Exception;
 }
 

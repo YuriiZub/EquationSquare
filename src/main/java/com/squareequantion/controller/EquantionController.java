@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * Main controller of Equation application
  *
  * @author Yurii Zub
- * @version 1.2.0
+ * @version 1.2.1
  */
 @Controller
 public class EquantionController {
@@ -25,40 +25,20 @@ public class EquantionController {
     @Autowired
     EquationSolution solution;
 
-    /**
-     * Getting of my page
-     *
-     * @param model model
-     * @return return's of main page
-     */
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getMainPage(Model model, HttpServletRequest request) {
         return "index";
     }
 
-    /**
-     * Submit data for calculation
-     *
-     * @param equantion source data
-     * @param model     model
-     * @return return's of results
-     */
-
     @RequestMapping(value = "/equation", method = RequestMethod.POST)
-    public String calcSubmit(@ModelAttribute EquationDTO equantion, Model model) {
-        model.addAttribute("equation", solution.doSolution(equantion));
+    public String showCalculationResults(@ModelAttribute EquationDTO equantion, Model model) throws  Exception{
+        model.addAttribute("equation", solution.calculateEquation(equantion));
         model.addAttribute("saved", "All saved");
         return "results";
     }
 
-    /**
-     * Page for showing calculated data
-     *
-     * @param model model
-     * @return return's page with calculation
-     */
     @RequestMapping(value = "/equation", method = RequestMethod.GET)
-    public String calcForm(Model model, HttpServletRequest request) {
+    public String showEnterForm(Model model, HttpServletRequest request) {
         String pagename = request.getRequestURL().toString();
         model.addAttribute("pagename", pagename);
         model.addAttribute("saved", "");
